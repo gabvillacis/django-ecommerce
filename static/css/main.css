@@ -1,4 +1,9 @@
 body {
-    background-color: #A4C8F0;
-    font-size: 50px;
+    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', sans-serif;    
+}
+
+.product-image {
+    max-width: 100%;
+    max-height: 300px;
 }
