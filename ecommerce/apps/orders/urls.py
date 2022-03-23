@@ -7,6 +7,5 @@ app_name = 'orders'
 urlpatterns = [
     path('cart-summary/', views.get_cart_summary, name='cart_summary'),
     path('add-to-cart/', views.add_to_cart, name='cart_add'),
-    path('delete-from-cart/', views.delete_from_cart, name='cart_delete'),
-    path('update-cart/', views.update_cart, name='cart_update'),
+    path('delete-from-cart/', views.delete_from_cart, name='cart_delete')
 ]

@@ -22,6 +22,17 @@
                             <th>Subtotal</th>
                             <th></th>
                         </tr>
+                        <tbody>                            
+                            {% for item in cart %}
+                                <tr id="tr-{{item.product.id}}">
+                                    <td>{{item.product.name}}</td>
+                                    <td>{{item.qty}}</td>
+                                    <td>{{item.product.price}}</td>
+                                    <td>{{item.subtotal}}</td>
+                                    <td><button class="btn btn-sm btn-danger" onclick="deleteFromCart('{{item.product.id}}')">-</button></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
                     </thead>
                     <tbody>
 
@@ -30,6 +41,29 @@
             {% endif %}
         </div>
     </div>
-
 </div>
+
+
+<script>
+    const deleteFromCart = (productId) => {        
+        console.log("Se está seleccionando el producto: " + productId + " para quitarlo del carrito.");
+
+        let data = {
+            product_id: productId
+        }
+
+        fetch("{% url 'orders:cart_delete' %}", {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {  "Content-type": "application/json; charset=UTF-8",
+                        "X-CSRFToken": "{{csrf_token}}"}
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("cart-qty").innerHTML = data.total_items;
+        });
+    }
+        
+</script>
+
 {% endblock %}

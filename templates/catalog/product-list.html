@@ -55,8 +55,11 @@
             body: JSON.stringify(data),
             headers: {  "Content-type": "application/json; charset=UTF-8",
                         "X-CSRFToken": "{{csrf_token}}"}
+        })
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("cart-qty").innerHTML = data.total_items;
         });
-
     }
         
 </script>

@@ -65,6 +65,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 "ecommerce.apps.catalog.context_processors.categories",
+                "ecommerce.apps.orders.context_processors.cart",
             ],
         },
     },
@@ -80,10 +81,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ecommerce',
-        'HOST': 'localhost',
+        'HOST': 'ls-4f306b7d8266d2566854866cfce5b1ed01e63490.ctu4mfb9xygf.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
         'USER': 'postgres',
-        'PASSWORD': 'p7g2FKv8Ms'
+        'PASSWORD': 'Passw0rd'
     }
 }
 

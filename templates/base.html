@@ -31,7 +31,7 @@
                           
                           {% for cat in categories %}
                           <li>
-                            <a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name|title }}</a>
+                            <a class="dropdown-item" href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
                           </li>
                           {% endfor %}
                       </ul>
@@ -42,7 +42,7 @@
                     <i class="bi-cart-fill me-1"></i>
                     Carrito
                     {% with cart_items=cart|length %}
-                    <span class="badge bg-dark text-white ms-1 rounded-pill">
+                    <span id="cart-qty" class="badge bg-dark text-white ms-1 rounded-pill">
                         {{ cart_items }}
                     </span>
                     {% endwith %}
@@ -52,7 +52,7 @@
       </div>
   </nav>    
   <!-- Main Section-->
-  <main class="container px-4 px-lg-5 mt-5">
+  <main class="container px-4 px-lg-5">
     {% block content %}{% endblock %}
   </main>
   <!-- Footer-->

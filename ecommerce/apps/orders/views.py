@@ -14,13 +14,19 @@ def add_to_cart(request):
     data = json.loads(request.body)
     product_id = int(data.get('product_id'))
     quantity = int(data.get('quantity'))
-    product = get_object_or_404(Product, id=product_id)    
-    cart.add(product=product, qty=quantity)
+    get_object_or_404(Product, id=product_id)
 
-    return JsonResponse({"items": "hola123"})
+    cart.add(product_id=product_id, qty=quantity)
+    return JsonResponse({"added": True, "total_items": cart.__len__()})
 
 def delete_from_cart(request):
-    pass
+    cart = Cart(request)    
+    data = json.loads(request.body)
+    product_id = int(data.get('product_id'))
+
+    cart.delete(product_id=product_id)
+    return JsonResponse({"deleted": True, "total_items": cart.__len__()})
+        
 
 def update_cart(request):
     pass
