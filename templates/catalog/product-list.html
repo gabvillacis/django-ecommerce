@@ -1,0 +1,62 @@
+<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+    {% for prod in products %}
+    <div class="col">
+        <div class="card h-100">
+            <!-- Product image-->
+            <img class="card-img-top product-image" src="{{ prod.image.url }}" alt="..."/>
+            <!-- Product details-->
+            <div class="card-body p-2">
+                <div class="text-center">
+                    <!-- Product name-->
+                    <h5 class="fw-bolder">{{prod.name}}</h5>
+                    <p>{{prod.description}}</p>
+                    <!-- Product price-->
+                    <p class="fw-bolder">${{prod.price}}</p>                        
+                </div>
+            </div>
+            <!-- Product actions-->
+            <div class="card-footer px-4 border-top-0 bg-transparent">                    
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <label for="select-qty-{{prod.id}}">Cant.</label>
+                        <select id="select-qty-{{prod.id}}">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <button type="button" id="add-button" class="btn btn-sm btn-success" 
+                            onclick="addToCart('{{prod.id}}')">Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+
+<script>
+    const addToCart = (productId) => {        
+        let selectQuantity = document.getElementById('select-qty-' + productId);
+        let quantity = selectQuantity.value;
+
+        console.log("Se está seleccionando el producto: " + productId + " para añadirlo al carrito con: " + quantity + " unid.");
+
+        let data = {
+            product_id: productId,
+            quantity            
+        }
+
+        fetch("{% url 'orders:cart_add' %}", {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {  "Content-type": "application/json; charset=UTF-8",
+                        "X-CSRFToken": "{{csrf_token}}"}
+        });
+
+    }
+        
+</script>
