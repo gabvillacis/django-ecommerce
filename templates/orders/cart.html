@@ -22,22 +22,24 @@
                             <th>Subtotal</th>
                             <th></th>
                         </tr>
-                        <tbody>                            
-                            {% for item in cart %}
-                                <tr id="tr-{{item.product.id}}">
-                                    <td>{{item.product.name}}</td>
-                                    <td>{{item.qty}}</td>
-                                    <td>{{item.product.price}}</td>
-                                    <td>{{item.subtotal}}</td>
-                                    <td><button class="btn btn-sm btn-danger" onclick="deleteFromCart('{{item.product.id}}')">-</button></td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
                     </thead>
-                    <tbody>
-
+                    <tbody>                            
+                        {% for item in cart %}
+                            <tr id="tr-{{item.product.id}}">
+                                <td>{{item.product.name}}</td>
+                                <td>{{item.qty}}</td>
+                                <td>{{item.product.price}}</td>
+                                <td>{{item.subtotal}}</td>
+                                <td><button class="btn btn-sm btn-danger" onclick="deleteFromCart('{{item.product.id}}')">-</button></td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
-                </table>
+                </table>                
+                <div class="row mt-5">
+                    <div class="col-md-12">
+                        {% include './checkout-form.html' %}
+                    </div>
+                </div>                    
             {% endif %}
         </div>
     </div>
@@ -60,10 +62,10 @@
         })
         .then(res => res.json())
         .then(data => {
-            document.getElementById("cart-qty").innerHTML = data.total_items;
+            document.getElementById("cart-qty").innerHTML = data.total_items;            
+            document.getElementById('tr-'+productId).remove();            
         });
-    }
-        
+    }        
 </script>
 
 {% endblock %}

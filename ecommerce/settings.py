@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'ecommerce.apps.catalog'
+    'ecommerce.apps.catalog',
+    'ecommerce.apps.orders'
 ]
 
 MIDDLEWARE = [
@@ -81,10 +82,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ecommerce',
-        'HOST': 'ls-4f306b7d8266d2566854866cfce5b1ed01e63490.ctu4mfb9xygf.us-east-1.rds.amazonaws.com',
+        'HOST': 'localhost',
         'PORT': '5432',
         'USER': 'postgres',
-        'PASSWORD': 'Passw0rd'
+        'PASSWORD': 'p7g2FKv8Ms'
     }
 }
 

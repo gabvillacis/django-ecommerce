@@ -1,0 +1,56 @@
+<form>
+    <div class="form-group">
+        <label for="fullname">Nombre: </label>
+        <input type="text" class="form-control" id="fullname" placeholder="Ingrese su nombre">
+    </div>
+    <div class="form-group">
+        <label for="email">Email: </label>
+        <input type="email" class="form-control" id="email" placeholder="Ingrese su email">
+    </div>
+    <div class="form-group">
+        <label for="city">Ciudad</label>
+        <input type="text" class="form-control" id="city" placeholder="Ingrese su ciudad">
+    </div>
+    <div class="form-group">
+        <label for="address">Dirección</label>
+        <input type="text" class="form-control" id="address" placeholder="Ingrese su dirección">
+    </div>
+    <div class="form-group">
+        <label for="phone">Teléfono</label>
+        <input type="text" class="form-control" id="phone" placeholder="Ingrese su teléfono" maxlength="10">
+    </div>
+    <button type="button" class="btn btn-primary mt-2" onclick="processOrder()">Procesar orden</button>
+</form>
+
+<script>
+    const processOrder = () => {
+        
+        let full_name = document.getElementById('fullname').value;
+        let email = document.getElementById('email').value;
+        let city = document.getElementById('city').value;
+        let address = document.getElementById('address').value;
+        let phone = document.getElementById('phone').value;
+        
+        let data = {
+            full_name: full_name,
+            email: email,
+            city: city,
+            address: address,
+            phone: phone,            
+        }
+
+        console.log('Datos del formulario: ', data);
+
+        fetch("{% url 'orders:process_order' %}", {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {  "Content-type": "application/json; charset=UTF-8",
+                        "X-CSRFToken": "{{csrf_token}}"}
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert('Su orden fue ingresada correctamente');
+            window.location.href = "{% url 'catalog:store_home' %}"
+        });
+    }
+</script>

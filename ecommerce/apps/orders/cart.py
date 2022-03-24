@@ -11,14 +11,14 @@ class Cart:
         self.cart = cart
 
 
-    def add(self, product_id, qty):
-        key = str(product_id)
+    def add(self, product, qty):
+        key = str(product.id)
         
         if key in self.cart:
             current_qty = self.cart[key]["qty"]
             self.cart[key]["qty"] = current_qty + qty
         else:
-            self.cart[key] = {"qty": qty}
+            self.cart[key] = {"qty": qty, "price": float(product.price)}
 
         self.save()
 
@@ -38,7 +38,7 @@ class Cart:
         if key in self.cart:
             del self.cart[key]
             self.save()
-
+    
 
     def __len__(self):
         return sum(item["qty"] for item in self.cart.values())
@@ -49,7 +49,7 @@ class Cart:
 
 
     def clear(self):
-        del self.session[settings.CART_SESSION_ID]        
+        del self.session[settings.CART_SESSION_ID]
         self.save()
 
 
@@ -64,3 +64,9 @@ class Cart:
         for item in cart.values():
             item["subtotal"] = item["product"].price * item["qty"]
             yield item
+    
+
+    def get_total(self):
+        return sum(item["price"] * item["qty"] for item in self.cart.values())
+
+        
