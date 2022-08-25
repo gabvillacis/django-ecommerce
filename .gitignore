@@ -129,5 +129,5 @@ dmypy.json
 .pyre/
 
 # Media files
-media/*
+media/images/*
 !media/images/ini-*.jpg
